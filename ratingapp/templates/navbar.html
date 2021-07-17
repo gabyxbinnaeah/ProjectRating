@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      #hello{
+        color:white;
+      }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse " style="background-color: #1d3557;">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'gallery' %}">View Photos</a>
+           
+          </div>
+          <span id="hello">Hello, {{request.user}}</span>
+          <span><a href="{% url 'logout' %}">Logout</a></span> 
+                
+    </nav>
+
+    
+</body>
+</html>
+
