@@ -60,7 +60,41 @@ class Project(models.Model):
         return projects
     
     def project_url(self):
-        
+        '''
+        method that retuns project url
+        '''
+
+        if self.project and hasattr(self.project, 'url'):
+            return self.project.url
+
+    def delete_project(self):
+        '''
+        method that deletes specified project using project id 
+        '''
+        self.delete()
+       
+
+    @classmethod
+    def update_project(cls,old,new):
+        '''
+        method that updates project
+        '''
+        cap = Project.objects.filter(caption=old).update(caption=new)
+        return cap
+
+    @classmethod
+    def search_project(cls, title):
+        '''
+        method that filters project by title
+        '''
+        return cls.objects.filter(title__icontains=title).all()
+
+    def __str__(self):
+        return str(self.title) if self.title else ''
+
+    
+
+
 
     
     
