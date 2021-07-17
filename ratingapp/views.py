@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm,UpdateProfileForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -51,3 +51,17 @@ def logoutUser(request):
 @login_required(login_url='login')
 def index(request):
     return render(request,"index.html")
+  
+def profile(request):
+    '''
+    methods that defines profile view
+    '''
+    
+    current_user=request.user
+    profile= Profile.objects.filter(user=current_user).first()
+    image_post =  request.user.image_set.all()
+    
+    return render(request,'profile.html',{"images":image_post,"profile":profile,"current_user":current_user})
+
+    
+

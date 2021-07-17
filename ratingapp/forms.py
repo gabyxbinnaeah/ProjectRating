@@ -13,7 +13,14 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ['user']
+        exclude = ['user'] 
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields=['image','bio']
+
+
 
     
 
