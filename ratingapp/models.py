@@ -14,5 +14,24 @@ class Profile(models.Model):
     bio = models.TextField(max_length=100)
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
 
+    def __str__(self):
+        
+        return self.profile_photo.url
+    
+    def save_profile(self):
+        '''
+        method that saves  user profile t
+        '''
+        self.save()
+        
+    # def delete_profile(self):
+    #     self.delete()
+    
+    # @classmethod   
+    # def update_bio(cls,id,new_bio):
+    #     cls.objects.filter(pk = id).update(bio=new_bio)
+    #     new_bio_object = cls.objects.get(bio = new_bio)
+    #     new_bio = new_bio_object.bio
+    #     return new_bio
 
 
