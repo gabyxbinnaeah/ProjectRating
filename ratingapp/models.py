@@ -41,3 +41,32 @@ class Profile(models.Model):
         return new_bio
 
 
+class Project(models.Model):
+    author=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
+    image=CloudinaryField('image',blank=True,null=True)
+    description=models.TextField(max_length=400,null=True)
+    date_created=models.DateTimeField(default=timezone.now)
+    link=models.URLField() 
+    title=models.CharField(max_length=100,null=True) 
+
+    def save_project(self):
+        self.save()
+
+    def projects(cls):
+        '''
+        method that return all projects
+        '''
+        projects=csl.objects.all()
+        return projects
+    
+    def project_url(self):
+        
+
+    
+    
+
+
+
+
+
+

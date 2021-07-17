@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm,UpdateProfileForm
+from .forms import CreateUserForm,UpdateProfileForm,ProfileForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 
 def registerPage(request):
@@ -66,7 +67,7 @@ def profile(request):
 def edit_profile(request):
     current_user = request.user
     if request.method == 'POST':
-        form = ProfileForm(request.POST,request.FILES)
+        form = UpdateProfileForm(request.POST,request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
             image.user = current_user
@@ -74,6 +75,6 @@ def edit_profile(request):
         return redirect('profile')
 
     else:
-        form = ProfileForm()
+        form = UpdateProfileForm()
         return render(request,'edit_profile.html',{"form":form})
 
