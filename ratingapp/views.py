@@ -51,7 +51,12 @@ def logoutUser(request):
 # Create your views here.
 @login_required(login_url='login')
 def index(request):
-    return render(request,"index.html")
+    date =dt.date.today()
+    projects = Project.objects.all()
+    print("Projects...",projects)
+    return render(request, 'index.html', {"projects":projects})
+
+  
   
 def profile(request):
     '''
