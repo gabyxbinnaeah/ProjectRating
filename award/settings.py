@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ratingapp',
     'bootstrap4',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-    #    <div class="navbar-header">
-    #         <!-- <span id="hello">Hello, {{request.user}}</span>
-    #         <span><a href="{% url 'logout' %}">Logout</a></span>  -->
-    #       </div>
+  

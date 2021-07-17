@@ -1,12 +1,13 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
-from . import views  
+from . import views 
+from django.urls import  path 
 
 urlpatterns=[
-    url('',views.index, name='index'),
-    url('register/', views.registerPage, name="register"),
-	url('login/', views.loginPage, name="login"), 
-    url('logout/',views.logoutUser,name="logout") ,
+    path('',views.index, name='index'),
+    path('register/', views.registerPage, name="register"),
+	path('login/', views.loginPage, name="login"), 
+    path('logout/',views.logoutUser,name="logout") ,
 
 ]
