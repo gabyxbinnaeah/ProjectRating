@@ -17,8 +17,11 @@
             <a class="navbar-brand" href="{% url 'gallery' %}">View Photos</a>
            
           </div>
-          <span id="hello">Hello, {{request.user}}</span>
-          <span><a href="{% url 'logout' %}">Logout</a></span> 
+          <div class="navbar-header">
+            <span id="hello">Hello, {{request.user}}</span>
+            <span><a href="{% url 'logout' %}">Logout</a></span> 
+          </div>
+          
                 
     </nav>
 
