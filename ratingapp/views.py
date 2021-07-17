@@ -48,5 +48,6 @@ def logoutUser(request):
 	return redirect('login')
 
 # Create your views here.
+@login_required(login_url='login')
 def index(request):
     return render(request,"index.html")

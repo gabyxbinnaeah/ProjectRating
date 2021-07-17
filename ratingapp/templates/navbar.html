@@ -12,7 +12,7 @@
         <span class="navbar-brand mb-0 h1">
             <a class="no-underline" href="{%url 'index'%}" style="color:black;text-decoration:none;">
                 RateProject
-            </a>
+            </a> 
         </span>
         <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="">
             <input name="search_user" autocomplete="off" id="searching" class="form-control d-none d-md-block"
@@ -35,8 +35,8 @@
                 <div class="instaicon like" style="display: inline;" class="dropdown">
                     <a href="{% url 'profile' user.username %}" class="dropdown-toggle btn btn-default"
                         data-toggle="dropdown" role="button" aria-expanded="false">
-
-                        <span class="material-icons">face</span> 
+                        <span id="hello">Hello, {{request.user}}</span>
+                        <!-- <span class="material-icons">face</span>  -->
                     </a>
                    
                     <ul class="dropdown-menu" role="menu">
@@ -57,7 +57,7 @@
                     </ul>
                 </div>
                 <span class="mb-0 h1 ml-auto mr-auto">
-                    <a href="/accounts/logout" style="color: inherit;"><span class="material-icons">logout</span></a>
+                    <a href="{% url 'logout' %}" style="color: inherit;"><span class="material-icons">Logout</span></a>
                 </span>
 
                 {% else %}
