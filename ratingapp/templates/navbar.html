@@ -1,31 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-      #hello{
-        color:white;
-      }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-inverse " style="background-color: #1d3557;">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'gallery' %}">View Photos</a>
-           
-          </div>
-          <div class="navbar-header">
-            <span id="hello">Hello, {{request.user}}</span>
-            <span><a href="{% url 'logout' %}">Logout</a></span> 
-          </div>
-          
-                
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="navbar card ">
+    <nav class="container-fluid"
+        style="padding-bottom: 5px; padding-left: 150px;">
+        <span class="navbar-brand mb-0 h1">
+            <a class="no-underline" href="{%url 'index'%}" style="color:black;text-decoration:none;">
+                RateProject
+            </a>
+        </span>
+        <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="">
+            <input name="search_user" autocomplete="off" id="searching" class="form-control d-none d-md-block"
+                placeholder="Search" style=color:black>
+            <i class="spinner "></i>
+        </form>
+        <span class="mb-0 h1 ml-auto mr-auto">
+            <a href="{%url 'index'%}" style="color: inherit;"><span class="material-icons">home</span></a>
+        </span>
+         
+        <span class="pull-right" >
+            <div class="col-sm-6 col-md-6" style="display: inline-flex; margin-right: 50px;">
+                {% if user.is_authenticated %}
+                <a href="{%url 'post' %}" class="mb-0 h1 ml-auto mr-auto">
+                    <span class="material-icons " style="color:black; margin-top: 9px;">
+                        add_box
+                    </span>
+                </a>
+
+                <div class="instaicon like" style="display: inline;" class="dropdown">
+                    <a href="{% url 'profile' user.username %}" class="dropdown-toggle btn btn-default"
+                        data-toggle="dropdown" role="button" aria-expanded="false">
+
+                        <span class="material-icons">face</span> 
+                    </a>
+                   
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{% url 'profile' user.username %}" style="color: inherit;">
+                                <span class="material-icons"></span>
+                                Profile
+                            </a>
+                                          
+                        </li>
+                        
+                        <li>
+                            <a href="/accounts/password_change" style="color: inherit;"><span class="material-icons">
+                    
+                                </span>Change Password</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <span class="mb-0 h1 ml-auto mr-auto">
+                    <a href="/accounts/logout" style="color: inherit;"><span class="material-icons">logout</span></a>
+                </span>
+
+                {% else %}
+                <a class='btn btn-default' href="/accounts/login">
+                    <p>Login</p>
+                </a>
+                {% endif %}
+            </div>
+
+        </span>
     </nav>
-
-    
-</body>
-</html>
-
+</div>
