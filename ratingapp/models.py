@@ -20,18 +20,24 @@ class Profile(models.Model):
     
     def save_profile(self):
         '''
-        method that saves  user profile t
+        method that saves  user profile 
         '''
         self.save()
         
-    # def delete_profile(self):
-    #     self.delete()
+    def delete_profile(self):
+        '''
+        method that deletes user profile 
+        '''
+        self.delete()
     
-    # @classmethod   
-    # def update_bio(cls,id,new_bio):
-    #     cls.objects.filter(pk = id).update(bio=new_bio)
-    #     new_bio_object = cls.objects.get(bio = new_bio)
-    #     new_bio = new_bio_object.bio
-    #     return new_bio
+    @classmethod   
+    def update_bio(cls,id,new_bio):
+        '''
+        method that updates user profile 
+        '''
+        cls.objects.filter(pk = id).update(bio=new_bio)
+        new_bio_object = cls.objects.get(bio = new_bio)
+        new_bio = new_bio_object.bio
+        return new_bio
 
 
