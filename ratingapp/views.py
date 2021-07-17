@@ -56,7 +56,22 @@ def index(request):
     print("Projects...",projects)
     return render(request, 'index.html', {"projects":projects})
 
-  
+
+def post(request):
+    '''
+    method that post projects 
+    '''
+    if request.method == 'POST':
+        form = ProjectPostForm(request.POST,request.FILES)
+        print(form.errors)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user.profile
+            post.save()
+            return redirect('index')
+    else:
+        form = ProjectPostForm()
+    return render(request,'post_project.html', {"form":form}) 
   
 def profile(request):
     '''
