@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from django.utils import timezone 
 from django.dispatch import receiver
+from django.core.validators import MaxValueValidator,MinValueValidator
 
 class Profile(models.Model):
     '''
@@ -49,15 +50,23 @@ class Project(models.Model):
     date_created=models.DateTimeField(default=timezone.now)
     link=models.URLField() 
     title=models.CharField(max_length=100,null=True) 
+    score=models.IntegerField(default=0,
+            validators=[
+                MaxValueValidator(5),
+                MinValueValidator(0)
+            ] 
+           
+    )
 
     def save_project(self):
         self.save()
 
-    def projects(cls):
+    @classmethod
+    def get_projects(cls):
         '''
         method that return all projects
         '''
-        projects=csl.objects.all()
+        projects=cls.objects.all()
         return projects
     
     def project_url(self):

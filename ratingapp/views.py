@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm,UpdateProfileForm,ProfileForm
+from .forms import CreateUserForm,UpdateProfileForm,ProfileForm,ProjectPostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Profile
+from .models import Profile,Project 
+import datetime as dt
 
 
 def registerPage(request):
@@ -52,11 +53,11 @@ def logoutUser(request):
 @login_required(login_url='login')
 def index(request):
     date =dt.date.today()
-    projects = Project.objects.all()
-    print("Projects...",projects)
+    projects = Project.get_projects()
     return render(request, 'index.html', {"projects":projects})
 
 
+@login_required(login_url='login')
 def post(request):
     '''
     method that post projects 
@@ -72,7 +73,8 @@ def post(request):
     else:
         form = ProjectPostForm()
     return render(request,'post_project.html', {"form":form}) 
-  
+
+@login_required(login_url='login') 
 def profile(request):
     '''
     methods that defines profile view
@@ -83,7 +85,7 @@ def profile(request):
     
     return render(request,'profile.html',{"profile":profile,"current_user":current_user})
 
-
+@login_required(login_url='login')
 def edit_profile(request):
     current_user = request.user
     if request.method == 'POST':
