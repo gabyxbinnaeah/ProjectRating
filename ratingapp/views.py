@@ -100,3 +100,22 @@ def edit_profile(request):
         form = UpdateProfileForm()
         return render(request,'edit_profile.html',{"form":form})
 
+
+@login_required(login_url='login')
+def search_results(request):
+
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched_projects = Project.search_project(search_term)
+        messages= f"{search_term}"
+
+              
+
+        return render(request, 'search.html',{"message":message,"found_project": searched_projects})
+
+    else:
+        message = "You haven't searched for any project"
+        return render(request, 'search.html',{"message":message})
+
+
+

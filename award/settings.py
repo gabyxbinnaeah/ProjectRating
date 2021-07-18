@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'ratingapp',
     'bootstrap4',
     'tinymce',
+    'djangoratings',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
