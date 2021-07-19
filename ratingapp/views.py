@@ -125,7 +125,7 @@ def get_project_rating(request,id):
 
 
 def single_project(request, id):
-  project = Project.objects.get(id = id)
+  projectGot = Project.objects.get(id = id)
   title = f'{project_title} page'
   try:
     user_profile = Profile.get_user_profile(request.user.username)
@@ -134,6 +134,6 @@ def single_project(request, id):
 
   context = {
     'user_profile':user_profile,
-    'project':project,
+    'projectGot':projectGot,
   }
   return render(request, 'app_templates/project.html', context)

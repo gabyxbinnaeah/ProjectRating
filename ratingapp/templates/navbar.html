@@ -6,17 +6,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="navbar car" style="background-color: #ff7d00;">
+<div class="navbar car" style="background-color:  #373d20;"> 
     <nav class="container-fluid"
         style="padding-bottom: 0px; padding-left: 150px;">
         <span class="navbar-brand mb-0 h1">
-            <a class="no-underline" href="{% url 'index' %}" style="color:black;text-decoration:none;">
+            <a class="no-underline" href="{% url 'index' %}" style="color:white;text-decoration:none;">
                 RateProject
             </a> 
         </span>
         <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}">
             <input name="project" autocomplete="off" id="searching" class="form-control d-none d-md-block"
-                placeholder="Search project..." style=color:black>
+                placeholder="Search project..." style=color:white>
             <i class="spinner "></i>
         </form>
         <span class="mb-0 h1 ml-auto mr-auto">
@@ -27,15 +27,15 @@
             <div class="col-sm-6 col-md-6" style="display: inline-flex; margin-right: 50px;">
                 {% if user.is_authenticated %}
                 <a href="{% url 'post' %}" class="mb-0 h1 ml-auto mr-auto">
-                    <span class="material-icons " style="color:black; margin-top: 9px;">
+                    <span class="material-icons " style="color:white; margin-top: 9px;">
                         add_box
                     </span>
                 </a>
 
-                <div class="instaicon like" style="display: inline;" class="dropdown">
+                <div class="instaicon like" style="display: inline; color:white;" class="dropdown">
                     <a href="" class="dropdown-toggle btn btn-default"
                         data-toggle="dropdown" role="button" aria-expanded="false">
-                        <span id="hello">Hello, {{request.user}}</span>
+                        <span id="hello" style="color:white">Hello, {{request.user}}</span>
                         <!-- <span class="material-icons">face</span>  -->
                     </a>
                    
@@ -57,7 +57,7 @@
                     </ul>
                 </div>
                 <span class="mb-0 h1 ml-auto mr-auto">
-                    <a href="{% url 'logout' %}" style="color: inherit;"><span class="material-icons">logout</span></a>
+                    <a href="{% url 'logout' %}" style="color: white;"><span class="material-icons">logout</span></a>
                 </span>
 
                 {% else %}

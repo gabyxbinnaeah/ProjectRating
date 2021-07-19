@@ -1,8 +1,125 @@
 {% extends "base.html"%}
 {% load static%}
 {%load bootstrap4%}
+{%block styles%}
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600);
+    @import url(https://fonts.googleapis.com/css?family=Martel:400,200,700,600,300);
+    body{
+        background-color: #eff1ed;
+    }
+    .card{
+      /* float: left; */
+      overflow: hidden;
+      width: 100%;
+      height: 500px;
+      margin: 20px;
+      background-color: white;
+      box-shadow: 0 10px 10px -8px rgba(black, 0.075), 0 12px 20px -8px rgba(black, 0.075), 0 15px 20px -8px rgba(black, 0.05), 0 0 10px 2px rgba(black, 0.025);
+    }
+      header{
+        position: relative;
+        overflow: hidden;
+        height: 200px;
+      }
+        img{
+          display: block;
+          position: absolute;
+          bottom: 0;
+          width: 150%;
+          margin-left: -25%;
+        }
+      
+      
+      article{
+        padding: 30px;
+      }
+        h2{
+          margin: 0;
+          font-family: 'Open Sans', sans-serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 10px;
+          text-align: center;
+          text-transform: uppercase;
+          letter-spacing: 0.25em;
+          color: rgba(black, 0.3);
+        }
+        
+        h1{
+          margin: 12px 0 15px 0;
+          font-family: 'Martel', serif;
+          font-weight: 400;
+          font-size: 30px;
+          line-height: 36px;
+          text-align: center;
+        }
+        
+        hr{
+          width: 24px;
+          margin: 0 auto;
+          border: none;
+          border-bottom: 2px solid rgba(black, 0.1);
+        }
+        
+        p{
+          margin: 15px auto 0 auto;
+          font-family: 'Noto Serif',"Book Antiqua",Palatino,"Palatino Linotype","Palatino LT STD",Georgia,serif;
+          font-size: 15px;
+          line-height: 21px;
+          color: rgba(black, 0.5);
+          text-align: center;
+        }
+        .checked {
+              color: grey;
+        }
+        .my-btn {
+          background-color: inherit !important;
+          border:0 !important;
+        }
+        .homepage{
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          height: 300px;
+          width:100%;
+        }
+
+    </style>
+{%endblock%}
+
 
 {% blockcontent%}
+<div class="container" style="background-color:#373d20">
+    <div class="row d-flex justify-content-center">
+      {%for foundProjects in projectGot%}
+      <div class="col-md-6 ">
+          <div class="card">
+              <header>
+              <img  src="{{foundProjects.image.url}}" class="img-responsive">
+              </header>
+              <article>
+              <h2 class="category">Website</h2>
+              <h1 class="headline">{{foundProjects.title}}</h1>
+              <hr>
+              <p class="description">{{foundProjects.description}}</p>
+              <br>
+              <div class="text-center"><a href="{{foundProjects.link}}" class="btn btn-outline-secondary btn-sm">Live Link</a></div> 
+              <div class="text-center"><a href="" class="btn btn-outline-secondary btn-sm">Rate Us</a></div> 
+    
+              <br>
+          </div>
+      </div>
+      {%endfor%}
+             
+    </div>
+    
+    <div id="confirm-box"></div>
+    </article>
+  
+      
+ 
 
+</div> 
 
 {%endblock%}
