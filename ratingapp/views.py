@@ -107,11 +107,9 @@ def search_results(request):
     if 'project' in request.GET and request.GET["project"]:
         search_term = request.GET.get("project")
         searched_projects = Project.search_project(search_term)
-        messages= f"{search_term}"
+        messages = f"{search_term}"
 
-              
-
-        return render(request, 'search.html',{"message":message,"found_project": searched_projects})
+        return render(request, 'search.html',{"found_project": searched_projects})
 
     else:
         message = "You haven't searched for any project"
@@ -119,3 +117,23 @@ def search_results(request):
 
 
 
+
+@login_required(login_url='login')
+def get_project_rating(request,id):
+    returned_projects = Project.get_project_id(pk=id)
+    return render(request, 'index.html', {"returned_projects":returned_projects})
+
+
+def single_project(request, id):
+  project = Project.objects.get(id = id)
+  title = f'{project_title} page'
+  try:
+    user_profile = Profile.get_user_profile(request.user.username)
+  except UserProfile.DoesNotExist:
+    user_profile = None
+
+  context = {
+    'user_profile':user_profile,
+    'project':project,
+  }
+  return render(request, 'app_templates/project.html', context)

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from django.utils import timezone 
 from django.dispatch import receiver
-from django.core.validators import MaxValueValidator,MinValueValidator
+
 
 class Profile(models.Model):
     '''
@@ -25,6 +25,9 @@ class Profile(models.Model):
         method that saves  user profile 
         '''
         self.save()
+    def get_user_profile(self):
+        profileIn=Profile.objects.all()
+        return profileIn
         
     def delete_profile(self):
         '''
@@ -50,13 +53,7 @@ class Project(models.Model):
     date_created=models.DateTimeField(default=timezone.now)
     link=models.URLField() 
     title=models.CharField(max_length=100,null=True) 
-    score=models.IntegerField(default=0,
-            validators=[
-                MaxValueValidator(5),
-                MinValueValidator(0)
-            ] 
-           
-    )
+    
 
     def save_project(self):
         self.save()
@@ -99,8 +96,70 @@ class Project(models.Model):
         '''
         return cls.objects.filter(title__icontains=title).all()
 
+
+    @classmethod
+    def get_project_id(cls,id):
+        found_proj=cls.objects.get(pk=id) 
+        return found_proj   
+
     def __str__(self):
         return str(self.title) if self.title else ''
+
+
+class rating_content_object(models.Model):
+    rate=models.IntegerField(default=0,null=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    description=models.TextField(max_length=255,blank=True, null=True)
+    project=models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+    def save_content(self):
+        self.save()
+     
+
+    @classmethod
+    def get_rating_content(cls):
+        return cls.objects.all()
+        
+    def __str__(self):
+        return self.user
+
+class rating_usability_object(models.Model):
+    rate=models.IntegerField(default=0,null=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    description=models.TextField(max_length=255,blank=True, null=True)
+    project=models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    def save_usability(self):
+        self.save()
+
+    @classmethod
+    def get_rating_usability(cls):
+        return cls.objects.all()
+        
+    def __str__(self):
+        return self.user
+
+class rating_design_object(models.Model):
+    rate=models.IntegerField(default=0,null=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    description=models.TextField(max_length=255,blank=True, null=True)
+    project=models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+    def save_design(self):
+        self.save()
+
+
+    @classmethod
+    def get_rating_design(cls):
+        return cls.objects.all()
+        
+    def __str__(self):
+        return self.user 
+
+
+
 
     
 

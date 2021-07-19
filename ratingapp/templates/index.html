@@ -23,7 +23,7 @@
         /* float: left; */
         overflow: hidden;
         width: 100%;
-        min-height: 500px;
+        height: 500px;
         margin: 20px;
         background-color: white;
         box-shadow: 0 10px 10px -8px rgba(black, 0.075), 0 12px 20px -8px rgba(black, 0.075), 0 15px 20px -8px rgba(black, 0.05), 0 0 10px 2px rgba(black, 0.025);
@@ -84,15 +84,22 @@
           .checked {
                 color: grey;
           }
+          .my-btn {
+            background-color: inherit !important;
+            border:0 !important;
+          }
 
     </style>
 </head>
 
 <body>
-  <div class="">
-    
-      {%for project_content in projects%}
-        <div class="col-md-4  col-md-4  col-md-4">
+  
+    <div class="container">
+      <div class="homepage"></div>
+      
+      <div class="row d-flex justify-content-center">
+        {%for project_content in projects%}
+        <div class="col-md-4 ">
             <div class="card">
                 <header>
                 <img  src="{{project_content.image.url}}" class="img-responsive">
@@ -103,29 +110,23 @@
                 <hr>
                 <p class="description">{{project_content.description}}</p>
                 <br>
-                <div class="text-center"><a href="{{project_content.link}}" class="btn btn-outline-secondary btn-sm">Live Link</a></div>  
+                <div class="text-center"><a href="{{project_content.link}}" class="btn btn-outline-secondary btn-sm">Live Link</a></div> 
+                <div class="text-center"><a href="" class="btn btn-outline-secondary btn-sm">Rate Us</a></div> 
+      
                 <br>
-                <div class="row">
-                  <div class="col-md-4 text-center " id="mara"><p>Rate:</p></div>
-                  <div class="col-md-8 text-center" style="padding-top:10px;">
-                    <span class="fa fa-star checked" id="first"></span>
-                    <span class="fa fa-star checked" id="second"></span>
-                    <span class="fa fa-star checked" id="third"></span>
-                    <span class="fa fa-star checked" id="fourth"></span>
-                    <span class="fa fa-star checked" id="fifth"></span>
-                  </div>
-
-                </div>
-                <br>
-                <div id="confirm-box"></div>
-                </article>
-
-              </div>
-          </div>
-      {%endfor%}  
-    </div>
-
+            </div>
+        </div>
+        {%endfor%}
+               
+      </div>
+      
+      <div id="confirm-box"></div>
+      </article>
     
+        
+   
+
+    </div>  
 </body>
 </html>
 {%endblock%}
