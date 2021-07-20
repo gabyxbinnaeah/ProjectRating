@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'ratingapp',
     'bootstrap4',
     'tinymce',
+    'rest_framework',
    
 ]
 

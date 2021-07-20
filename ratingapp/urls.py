@@ -13,7 +13,7 @@ urlpatterns=[
     path('edit/',views.edit_profile,name='edit'),
     path('post/', views.post, name="post"),
     path('search/', views.search_results, name="search"),
-    path('project/(\d+)/',views.get_project_rating, name="project"),
+    url(r'^project/(\d+)/$',views.single_project, name="project"),
 
 
 ] 

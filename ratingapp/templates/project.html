@@ -89,28 +89,106 @@
 {%endblock%}
 
 
-{% blockcontent%}
+{% block content%}
 <div class="container" style="background-color:#373d20">
     <div class="row d-flex justify-content-center">
-      {%for foundProjects in projectGot%}
+      {%if projectGot%}
       <div class="col-md-6 ">
           <div class="card">
               <header>
-              <img  src="{{foundProjects.image.url}}" class="img-responsive">
+              <img  src="{{projectGot.image.url}}" class="img-responsive">
               </header>
               <article>
               <h2 class="category">Website</h2>
-              <h1 class="headline">{{foundProjects.title}}</h1>
+              <h1 class="headline">{{projectGot.title}}</h1>
               <hr>
-              <p class="description">{{foundProjects.description}}</p>
-              <br>
-              <div class="text-center"><a href="{{foundProjects.link}}" class="btn btn-outline-secondary btn-sm">Live Link</a></div> 
-              <div class="text-center"><a href="" class="btn btn-outline-secondary btn-sm">Rate Us</a></div> 
+              <p class="description">{{projectGot.description}}</p>
+              <br> 
+              <div class="">
+                 <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Rate Us
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{projectGot.title}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="">
+                            
+                            <div class="">
+                                <label for="Design">Desisgn</label>
+                                1-<input type="radio" name="design_rate" value="1" id="design_rate_rate">
+                                2-<input type="radio" name="design_rate" value="2" id="design_rate_rate">
+                                3-<input type="radio" name="design_rate" value="3" id="design_rate_rate">
+                                4-<input type="radio" name="design_rate" value="4" id="design_rate_rate">
+                                5-<input type="radio" name="design_rate" value="5" id="design_rate_rate">
+                                6-<input type="radio" name="design_rate" value="6" id="design_rate_rate">
+                                7-<input type="radio" name="design_rate" value="7" id="design_rate_rate">
+                                8-<input type="radio" name="design_rate" value="8" id="design_rate_rate">
+                                9-<input type="radio" name="design_rate" value="9" id="design_rate_rate">
+                                10-<input type="radio" name="design_rate" value="10" id="design_rate_rate">
+                                
+                            </div>
+                            <div class="">
+                                <label for="usability">Usability</label>
+                                1-<input type="radio" name="usability_rate" value="1" id="usability_rate_rate">
+                                2-<input type="radio" name="usability_rate" value="2" id="usability_rate_rate">
+                                3-<input type="radio" name="usability_rate" value="3" id="usability_rate_rate">
+                                4-<input type="radio" name="usability_rate" value="4" id="usability_rate_rate">
+                                5-<input type="radio" name="usability_rate" value="5" id="usability_rate_rate">
+                                6-<input type="radio" name="usability_rate" value="6" id="usability_rate_rate">
+                                7-<input type="radio" name="usability_rate" value="7" id="usability_rate_rate">
+                                8-<input type="radio" name="usability_rate" value="8" id="usability_rate_rate">
+                                9-<input type="radio" name="usability_rate" value="9" id="usability_rate_rate">
+                                10-<input type="radio" name="usability_rate" value="10" id="usability_rate_rate">
+                        
+                            </div>
+                            
+                            <div class="">
+                                <label for="content">Content</label>
+                                1-<input type="radio" name="content_rate" value="1" id="content_rate_rate">
+                                2-<input type="radio" name="content_rate" value="2" id="content_rate_rate">
+                                3-<input type="radio" name="content_rate" value="3" id="content_rate_rate">
+                                4-<input type="radio" name="content_rate" value="4" id="content_rate_rate">
+                                5-<input type="radio" name="content_rate" value="5" id="content_rate_rate">
+                                6-<input type="radio" name="content_rate" value="6" id="content_rate_rate">
+                                7-<input type="radio" name="content_rate" value="7" id="content_rate_rate">
+                                8-<input type="radio" name="content_rate" value="8" id="content_rate_rate">
+                                9-<input type="radio" name="content_rate" value="9" id="content_rate_rate">
+                                10-<input type="radio" name="content_rate" value="10" id="content_rate_rate">
+                            
+                            </div>
+                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            
+                        
+                            
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                
+                    
+                
+              </div>
     
               <br>
           </div>
       </div>
-      {%endfor%}
+      {%endif%}
              
     </div>
     
@@ -122,4 +200,4 @@
 
 </div> 
 
-{%endblock%}
+{% endblock %}

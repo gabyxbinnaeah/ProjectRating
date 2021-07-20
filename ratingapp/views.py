@@ -126,14 +126,42 @@ def get_project_rating(request,id):
 
 def single_project(request, id):
   projectGot = Project.objects.get(id = id)
-  title = f'{project_title} page'
   try:
     user_profile = Profile.get_user_profile(request.user.username)
   except UserProfile.DoesNotExist:
     user_profile = None
 
+  if request.method == 'POST':
+        design = int(request.POST.get('design'))
+        usability = int(request.POST.get('usability'))
+        content = int(request.POST.get('content'))
+        desc = request.POST.get('rate_description')
+        
+        new_rate = Rating(design = design, usability= usability, content = content, description = desc , user = request.user_profile, project = projectGot)
+        new_rate.save()
+        return http.HttpResponseRedirect
+
+  projects_votes=Rating.project_votes(pk=id)
   context = {
     'user_profile':user_profile,
     'projectGot':projectGot,
+    'projects_votes':projects_votes,
+    
   }
-  return render(request, 'app_templates/project.html', context)
+  return render(request, 'project.html', context)
+
+def rating_results(request):
+    if request.method == 'POST':
+        design = int(request.POST.get('design'))
+        usability = int(request.POST.get('usability'))
+        content = int(request.POST.get('content'))
+        desc = request.POST.get('rate_description')
+        
+        new_rate = Rating(design = design, usability= usability, content = content, description = desc , user = request.user, project = project)
+        new_rate.save()
+
+
+
+
+
+

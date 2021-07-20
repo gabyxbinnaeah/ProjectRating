@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from django.utils import timezone 
 from django.dispatch import receiver
+from django.core.validators import MinValueValidator,MaxValueValidator
 
 
 class Profile(models.Model):
@@ -105,59 +106,28 @@ class Project(models.Model):
     def __str__(self):
         return str(self.title) if self.title else ''
 
+ 
+class Rating(models.Model):
+    design = models.IntegerField(default=1,validators=[MaxValueValidator(10, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
+    usability = models.IntegerField(default=1,validators=[MaxValueValidator(10, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
+    content = models.IntegerField(default=1,validators=[MaxValueValidator(10, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
+    score_description = models.TextField(blank=True)
+    user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, default=3)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-class rating_content_object(models.Model):
-    rate=models.IntegerField(default=0,null=True)
-    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    description=models.TextField(max_length=255,blank=True, null=True)
-    project=models.ForeignKey(Project, on_delete=models.CASCADE)
 
-
-    def save_content(self):
-        self.save()
-     
-
-    @classmethod
-    def get_rating_content(cls):
-        return cls.objects.all()
-        
-    def __str__(self):
-        return self.user
-
-class rating_usability_object(models.Model):
-    rate=models.IntegerField(default=0,null=True)
-    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    description=models.TextField(max_length=255,blank=True, null=True)
-    project=models.ForeignKey(Project, on_delete=models.CASCADE)
-
-    def save_usability(self):
+    def save_rating(self):
         self.save()
 
-    @classmethod
-    def get_rating_usability(cls):
-        return cls.objects.all()
+    def get_ratings(self):
+        return Rating.objects.all() 
         
-    def __str__(self):
-        return self.user
-
-class rating_design_object(models.Model):
-    rate=models.IntegerField(default=0,null=True)
-    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    description=models.TextField(max_length=255,blank=True, null=True)
-    project=models.ForeignKey(Project, on_delete=models.CASCADE)
-
-
-    def save_design(self):
-        self.save()
-
-
     @classmethod
-    def get_rating_design(cls):
-        return cls.objects.all()
-        
-    def __str__(self):
-        return self.user 
+    def project_votes(cls,id):
+        return cls.objects.get(pk=id)
 
+    def __str__(self):
+            return self.user 
 
 
 
