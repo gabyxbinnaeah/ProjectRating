@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile,Project 
 import datetime as dt
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import MerchSerializer
+
 
 def registerPage(request):
 	if request.user.is_authenticated:
@@ -162,6 +166,10 @@ def rating_results(request):
 
 
 
-
+class MerchList(APIView):
+    def get(self, request, format=None):
+        all_merch = Project.objects.all()
+        serializers = MerchSerializer(all_merch, many=True)
+        return Response(serializers.data)
 
 
