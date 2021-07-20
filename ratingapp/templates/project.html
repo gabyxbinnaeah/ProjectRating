@@ -201,20 +201,17 @@
       {%endif%}
 
     {% if projects_votes%}
-    <div class="col-md-2"></div>
-    <div class="row text-center col-md-8" style="padding:20px;padding-bottom: 30px; padding-left: 220px;">
-      <div class="col-md-4 card-body bg-secondary"><p style="color:white;">Usability:{{projects_votes.usability}}</p></div>
-      <div class=" col-md-4 card-body" style="background-color:#373d20;"><p style="color:white;">Design:{{projects_votes.design}}</p> </div>
-      <div class=" col-md-4 card-body bg-secondary"><p style="color:white;">Content:{{projects_votes.content}}</p></div>
+   
+    <div class="row text-center " style="padding:20px;padding-bottom: 30px; padding-left: 180px;">
+      <div class="col-md-1 " style="border-radius:50%;"><img src="{{projects_votes.user_profile.image.url}}" alt="" height="70px" width="100%" style="border-radius:50%;"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2"><p style="color: black;padding-top: 20px;"> Name: {{projects_votes.user_profile.user.username}}</p></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2 card-body bg-secondary"><p style="color:white;">Usability:{{projects_votes.usability}}</p></div>
+      <div class=" col-md-2 card-body" style="background-color:#373d20;"><p style="color:white;">Design:{{projects_votes.design}}</p> </div>
+      <div class=" col-md-2 card-body bg-secondary"><p style="color:white;">Content:{{projects_votes.content}}</p></div>
     </div>
-    <div class="col-md-2"></div>
-
-    <div class="row" style="padding:20px;padding-bottom: 30px;">
-      <div class="col-md-3"></div>
-      <div class="col-md-4"><p style="color: black;">Rator Name: {{projects_votes.user_profile.user.username}}</p></div>
-      <div class="col-md-2 card-header" style="border-radius:50%;"><img src="{{projects_votes.user_profile.image.url}}" alt="" height="70px" width="50px"></div>
-      <div class="col-md-3"></div>
-    </div>  
+     
 
     {%endif%}
              
