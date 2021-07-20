@@ -14,6 +14,7 @@ urlpatterns=[
     path('post/', views.post, name="post"),
     path('search/', views.search_results, name="search"),
     url(r'^project/(\d+)/$',views.single_project, name="project"),
+    url(r'^api/merch/$', views.MerchList.as_view()) 
 
 
 ] 
