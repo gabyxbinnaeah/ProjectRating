@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
 from django.urls import include, path
+from rest_framework.authtoken.views import obtain_auth_token
+
 
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'', include('ratingapp.urls')),
+    url(r'^api-token-auth/', obtain_auth_token),
 ]
