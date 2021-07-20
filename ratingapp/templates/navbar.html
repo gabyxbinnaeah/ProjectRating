@@ -10,61 +10,74 @@
     <nav class="container-fluid"
         style="padding-bottom: 0px; padding-left: 150px;">
         <span class="navbar-brand mb-0 h1">
-            <a class="no-underline" href="{% url 'index' %}" style="color:white;text-decoration:none;">
-                RateProject
-            </a> 
+            <div class="no-underline" href="{% url 'index' %}" style="color:white;text-decoration:none;background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiCHmlxf-dz7YBlqp8QK7zkpaVbdFm3hAJCw&usqp=CAU');border-radius: 50%; height:80px;width:100px;background-size: cover;background-repeat: no-repeat;background-position:center center;">
+                
+            </div> 
+        </span>
+
+        <span class="mb-0 h1 ml-auto mr-auto">
+            <a href="{%url 'index'%}" style="color: white;"><span class="material-icons">home</span></a>
+        </span>
+        <span class="navbar-brand mb-0 h1">
+            <a href="{% url 'post' %}" class="mb-0 h1 ml-auto mr-auto">
+                <span class="material-icons " style="color:white; margin-top: 9px;">
+                    add_box
+                </span>
+            </a>
         </span>
         <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}">
             <input name="project" autocomplete="off" id="searching" class="form-control d-none d-md-block"
                 placeholder="Search project..." style=color:white>
             <i class="spinner "></i>
         </form>
-        <span class="mb-0 h1 ml-auto mr-auto">
-            <a href="{%url 'index'%}" style="color: inherit;"><span class="material-icons">home</span></a>
-        </span>
-         
-        <span class="pull-right" >
-            <div class="col-sm-6 col-md-6" style="display: inline-flex; margin-right: 50px;">
-                {% if user.is_authenticated %}
-                <a href="{% url 'post' %}" class="mb-0 h1 ml-auto mr-auto">
-                    <span class="material-icons " style="color:white; margin-top: 9px;">
-                        add_box
-                    </span>
-                </a>
-
+        {% if user.is_authenticated %}
                 <div class="instaicon like" style="display: inline; color:white;" class="dropdown">
-                    <a href="" class="dropdown-toggle btn btn-default"
-                        data-toggle="dropdown" role="button" aria-expanded="false">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
                         <span id="hello" style="color:white">Hello, {{request.user}}</span>
-                        <!-- <span class="material-icons">face</span>  -->
-                    </a>
-                   
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="{% url 'profile'%}" style="color: inherit;">
-                                <span class="material-icons"></span>
-                                Profile
-                            </a>
-                                          
-                        </li>
-                        
-                        <li>
-                            <a href="/accounts/password_change" style="color: inherit;"><span class="material-icons">
+                    </button>
                     
-                                </span>Change Password</a>
-                        </li>
-                        
-                    </ul>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <li>
+                                    <a href="{% url 'profile'%}" style="color: black;text-decoration: none;">
+                                        <span class="material-icons"></span>
+                                        <button type="button" class="btn btn-secondary">See Profile</button>   
+                                    </a>
+                                                  
+                                </li>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
                 </div>
                 <span class="mb-0 h1 ml-auto mr-auto">
                     <a href="{% url 'logout' %}" style="color: white;"><span class="material-icons">logout</span></a>
                 </span>
 
                 {% else %}
-                <a class='btn btn-default' href="/accounts/login">
-                    <p>Login</p>
+                <a class='btn btn-default' href="{% url 'login' %}">
+                   <button type="button" class="btn btn-secondary">Login</button>
+                   
                 </a>
-                {% endif %}
+            {% endif %}
+         
+        <span class="pull-right" >
+            <div class="col-sm-6 col-md-6" style="display: inline-flex; margin-right: 50px;">
+                
             </div>
 
         </span>

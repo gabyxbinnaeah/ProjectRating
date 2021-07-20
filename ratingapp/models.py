@@ -19,7 +19,7 @@ class Profile(models.Model):
 
     def __str__(self):
         
-        return self.profile_photo.url
+        return self.bio
     
     def save_profile(self):
         '''
@@ -123,7 +123,7 @@ class Rating(models.Model):
         return Rating.objects.all() 
         
     @classmethod
-    def project_votes(cls,id):
+    def projectVotes(cls,id):
         return cls.objects.get(pk=id)
 
     def __str__(self):

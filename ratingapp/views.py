@@ -4,7 +4,7 @@ from .forms import CreateUserForm,UpdateProfileForm,ProfileForm,ProjectPostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Profile,Project 
+from .models import Profile,Project,Rating
 import datetime as dt
 
 from rest_framework.response import Response
@@ -55,7 +55,7 @@ def logoutUser(request):
 	return redirect('login')
 
 # Create your views here.
-@login_required(login_url='login')
+
 def index(request):
     date =dt.date.today()
     projects = Project.get_projects()
@@ -86,9 +86,10 @@ def profile(request):
     '''
     current_user=request.user
     profile= Profile.objects.filter(user=current_user).first()
+    my_posts=Project.objects.filter(author=request.user)
   
     
-    return render(request,'profile.html',{"profile":profile,"current_user":current_user})
+    return render(request,'profile.html',{"profile":profile,"current_user":current_user,"my_posts":my_posts})
 
 @login_required(login_url='login')
 def edit_profile(request):
@@ -137,16 +138,21 @@ def single_project(request, id):
     user_profile = None
 
   if request.method == 'POST':
-        design = int(request.POST.get('design'))
-        usability = int(request.POST.get('usability'))
-        content = int(request.POST.get('content'))
-        desc = request.POST.get('rate_description')
+        design = int(request.POST.get('design_rate'))
+        usability = int(request.POST.get('usability_rate'))
+        content = int(request.POST.get('content_rate'))
+        desc = request.POST.get('description')
+        usr_profile=Profile.objects.get(user_id=id)
         
-        new_rate = Rating(design = design, usability= usability, content = content, description = desc , user = request.user_profile, project = projectGot)
+        new_rate = Rating(design = design, usability= usability, content = content, score_description = desc ,  user_profile = usr_profile, project = projectGot)
         new_rate.save()
-        return http.HttpResponseRedirect
+        return redirect('index') 
 
-  projects_votes=Rating.project_votes(pk=id)
+  try :
+    projects_votes= Rating.projectVotes(id) 
+  except Rating.DoesNotExist:
+    projects_votes=None 
+
   context = {
     'user_profile':user_profile,
     'projectGot':projectGot,
@@ -204,4 +210,10 @@ class MerchDescription(APIView):
             serializers.save()
             return Response(serializers.data)
         else:
-            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+
+    def delete(self, request, pk, format=None):
+        merch = self.get_merch(pk)
+        merch.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

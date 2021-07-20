@@ -6,13 +6,13 @@
     @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600);
     @import url(https://fonts.googleapis.com/css?family=Martel:400,200,700,600,300);
     body{
-        background-color: #eff1ed;
+        background-color:  #eff1ed;
     }
     .card{
       /* float: left; */
       overflow: hidden;
       width: 100%;
-      height: 500px;
+      min-height: 500px;
       margin: 20px;
       background-color: white;
       box-shadow: 0 10px 10px -8px rgba(black, 0.075), 0 12px 20px -8px rgba(black, 0.075), 0 15px 20px -8px rgba(black, 0.05), 0 0 10px 2px rgba(black, 0.025);
@@ -84,16 +84,22 @@
           height: 300px;
           width:100%;
         }
+        footer{
+            text-align: center;
+            padding: 3px;
+            background-color: #373d20;
+            color: white;
+          } 
 
     </style>
 {%endblock%}
 
 
 {% block content%}
-<div class="container" style="background-color:#373d20">
+<div class="container" >
     <div class="row d-flex justify-content-center">
       {%if projectGot%}
-      <div class="col-md-6 ">
+      <div class="col-md-8 ">
           <div class="card">
               <header>
               <img  src="{{projectGot.image.url}}" class="img-responsive">
@@ -106,9 +112,12 @@
               <br> 
               <div class="">
                  <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <div class="card-body text-center">
+                  <button type="button" class="btn btn-secondary btn-md" data-toggle="modal" data-target="#exampleModal">
                     Rate Us
-                </button>
+                  </button>
+                </div>
+               
                 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -121,7 +130,8 @@
                         </button>
                         </div>
                         <div class="modal-body">
-                        <form action="">
+                        <form action="{% url 'project' projectGot.id%}" method="POST">
+                          {%csrf_token%}
                             
                             <div class="">
                                 <label for="Design">Desisgn</label>
@@ -173,7 +183,7 @@
                             </div>
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -189,15 +199,31 @@
           </div>
       </div>
       {%endif%}
-             
-    </div>
-    
-    <div id="confirm-box"></div>
-    </article>
-  
-      
- 
 
-</div> 
+    {% if projects_votes%}
+    <div class="col-md-2"></div>
+    <div class="row text-center col-md-8" style="padding:20px;padding-bottom: 30px; padding-left: 220px;">
+      <div class="col-md-4 card-body bg-secondary"><p style="color:white;">Usability:{{projects_votes.usability}}</p></div>
+      <div class=" col-md-4 card-body" style="background-color:#373d20;"><p style="color:white;">Design:{{projects_votes.design}}</p> </div>
+      <div class=" col-md-4 card-body bg-secondary"><p style="color:white;">Content:{{projects_votes.content}}</p></div>
+    </div>
+    <div class="col-md-2"></div>
+
+    <div class="row" style="padding:20px;padding-bottom: 30px;">
+      <div class="col-md-3"></div>
+      <div class="col-md-4"><p style="color: black;">Rator Name: {{projects_votes.user_profile.user.username}}</p></div>
+      <div class="col-md-2 card-header" style="border-radius:50%;"><img src="{{projects_votes.user_profile.image.url}}" alt="" height="70px" width="50px"></div>
+      <div class="col-md-3"></div>
+    </div>  
+
+    {%endif%}
+             
+</div>
+    
+<footer >
+  <p>Author: Gabriel Odhiambo<br>
+  <a href="mailto:gabyxbinnaeh4@gmail.com" style="color:white">gabyxbinnaeh4@gmail.com</a>
+  </p>
+</footer> 
 
 {% endblock %}

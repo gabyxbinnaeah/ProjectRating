@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="container">
     <div class="row ">
@@ -7,7 +8,7 @@
             
             <h5 class="user">{{profile.user.username}}</h5>
             <img src="{{profile.image.url}}" class="img-thumbnail img-responsive img-fluid" alt="" 
-             style="border-radius: 50%; width:100px; height:100px; border-color: brown; border-width: 1.5px;">
+             style="border-radius: 50%; width:100px; height:100px; border-color: #373d20; border-width: 1.5px;">
         </div>
         <div class="col-sm-6 col-md-6">
             <hr>
@@ -15,10 +16,31 @@
            
         </div>
         
-        <div class="col-sm-6 col-md-2">
-                <a href="{%url 'edit' %}" class="btn btn-outline-info btn-sm">Edit Profile</a>
+        <div class="col-sm-6 col-md-2" style="padding-top:20px;">
+                <a href="{%url 'edit' %}" class="btn btn-outline-secondary btn-sm">Edit Profile</a>
         </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        {%if my_posts%}
+        {% for posts in my_posts%}
+        <div class="col-md-4" style="padding:10px;">
+        <div class="card">
+                <div class="card-header">{{posts.title}}</div>
+                <div class="card-body" > <img src="{{posts.image.url}}" alt="" height="100px" width="100%"> </div>
+                <div class="card-footer text-center"> <button src="{{posts.link}}" class="btn btn-secondary">Live Link</button></div>
+            </div>
+        </div>
+            
+        {%endfor%}
+        {%else%} <p>You havent created any post. Create one!</p>
+        {%endif%}
     </div>
        
 </div>
+<footer  style="text-align: center;padding: 3px;background-color: #373d20;color: white;">
+    <p>Author: Gabriel Odhiambo<br>
+    <a href="mailto:gabyxbinnaeh4@gmail.com" style="color:white">gabyxbinnaeh4@gmail.com</a>
+    </p>
+</footer>
+
 {% endblock %}
