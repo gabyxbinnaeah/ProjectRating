@@ -10,6 +10,7 @@ import datetime as dt
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import MerchSerializer
+from rest_framework import status
 
 
 def registerPage(request):
@@ -171,5 +172,13 @@ class MerchList(APIView):
         all_merch = Project.objects.all()
         serializers = MerchSerializer(all_merch, many=True)
         return Response(serializers.data)
+
+
+    def post(self, request, format=None):
+        serializers = MerchSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
