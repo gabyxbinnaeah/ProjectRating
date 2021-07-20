@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import MerchSerializer
 from rest_framework import status
-
+from .permissions import IsAdminOrReadOnly
 
 def registerPage(request):
 	if request.user.is_authenticated:
@@ -182,3 +182,17 @@ class MerchList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+    permission_classes = (IsAdminOrReadOnly,) 
+
+class MerchDescription(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get_merch(self, pk):
+        try:
+            return Project.objects.get(pk=pk)
+        except Project.DoesNotExist:
+            return Http404
+
+    def get(self, request, pk, format=None):
+        merch = self.get_merch(pk)
+        serializers = MerchSerializer(merch)
+        return Response(serializers.data)
