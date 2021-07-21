@@ -46,6 +46,13 @@ class Profile(models.Model):
         new_bio = new_bio_object.bio
         return new_bio
 
+    @classmethod
+    def update_profile_bio(cls,id,bio):
+        '''
+         Method that updates user profile bio
+        '''
+        return cls.objects.filter(id=id).update(bio=bio) 
+
 
 class Project(models.Model):
     author=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
