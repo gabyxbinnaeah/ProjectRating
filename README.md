@@ -68,7 +68,7 @@ ___
 
 # Live link
 
-### click on this link to access application:
+### click on this link to access application:https://gabyrating.herokuapp.com/
 
 ___
 
